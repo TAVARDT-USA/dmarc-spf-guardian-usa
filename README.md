@@ -1,14 +1,13 @@
 # DMARC, SPF and DKIM Guardian | TAVARDT United States
 
 [![Technical Audit](https://img.shields.io/badge/TAVARDT-Email%20Security-5b3cf5.svg)](https://tools.tavardt.com/dmarc-checker/)
-[![Jurisdiction](https://img.shields.io/badge/Jurisdiction-United%20States-00C853.svg)](https://ag.tavardt.com/)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 
 DNS email authentication auditor for eliminating domain spoofing, phishing, and enforcing CISA BOD 18-01 and NIST SP 800-177 standards.
 
-Developed and maintained by the cybersecurity and infrastructure defense division of **[TAVARDT United States](https://ag.tavardt.com/)**.
+Developed and maintained by the cybersecurity and infrastructure defense division of **TAVARDT United States**.
 
----
+***
 
 ## Features and Verification Capabilities
 
@@ -18,7 +17,7 @@ Developed and maintained by the cybersecurity and infrastructure defense divisio
 * **Forensic and Aggregate Reporting**: Verification of aggregate (rua) and forensic (ruf) feedback loops.
 * **Regulatory and Standards Compliance**: Designed in alignment with CISA Binding Operational Directive 18-01 and NIST SP 800-177 Trustworthy Email.
 
----
+***
 
 ## Installation and Quick Start
 
@@ -33,20 +32,20 @@ python guardian.py enterprise.com
 To test a specific DKIM selector or export results in structured JSON format:
 
 ```bash
-python guardian.py enterprise.com --selector mail --json
+python guardian.py enterprise.com -selector mail -json
 ```
 
----
+***
 
 ## Online Web Diagnostics
 
 For continuous perimeter monitoring and graphical reporting, access the official web diagnostic suite:
 
-* **[DMARC and Email Authentication Checker](https://tools.tavardt.com/dmarc-checker/)**
-* **[TAVARDT United States Corporate Portal](https://ag.tavardt.com/)**
+* **DMARC and Email Authentication Checker**
+* **TAVARDT United States Corporate Portal**
 
----
+***
 
 ## Enterprise Defense Consulting
 
-For dedicated cybersecurity architecture, threat modeling, and incident readiness in United States, contact **[TAVARDT United States](https://ag.tavardt.com/contact/)**.
+For dedicated cybersecurity architecture, threat modeling, and incident readiness in United States, contact **TAVARDT United States**.
