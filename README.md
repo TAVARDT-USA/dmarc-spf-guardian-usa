@@ -1,4 +1,4 @@
-# DMARC, SPF and DKIM Guardian | TAVARDT United States
+# DMARC, SPF and DKIM Guardian
 
 [![Technical Audit](https://img.shields.io/badge/TAVARDT-Email%20Security-5b3cf5.svg)](https://tools.tavardt.com/dmarc-checker/)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
@@ -49,3 +49,7 @@ For continuous perimeter monitoring and graphical reporting, access the official
 ## Enterprise Defense Consulting
 
 For dedicated cybersecurity architecture, threat modeling, and incident readiness in United States, contact **TAVARDT United States**.
+
+***
+
+© 2026 TAVARDT. All rights reserved.
