@@ -6,39 +6,113 @@
 
 DNS email authentication auditor for eliminating domain spoofing, phishing, and enforcing CISA BOD 18-01 and NIST SP 800-177 standards.
 
-***
-
-## Features and Verification Capabilities
-
-* **DMARC Policy Enforcement**: In-depth inspection of enforcement directives (reject, quarantine, and none), subdomain policy (sp), and percentage enforcement rate (pct).
-* **SPF Record Audit**: Validation of authorized sender mechanisms, DNS query lookup limits, and strict enforcement qualifiers (-all vs ~all).
-* **DKIM Signature Verification**: Cryptographic public key verification across specified DNS selectors.
-* **Forensic and Aggregate Reporting**: Verification of aggregate (rua) and forensic (ruf) feedback loops.
-* **Regulatory and Standards Compliance**: Designed in alignment with CISA Binding Operational Directive 18-01 and NIST SP 800-177 Trustworthy Email.
+Engineered and maintained by the cyber defence practice at **TAVARDT** for North American infrastructure.
 
 ***
 
-## Installation and Quick Start
+## 1. Features and Verification Capabilities
+
+This command-line tool audits DNS authentication records, anti-spoofing postures, and cryptographic keys for United States organizations:
+
+* **DMARC Policy Enforcement:** In-depth inspection of enforcement directives (reject, quarantine, and none), subdomain policy (sp), and percentage enforcement rate (pct).
+* **SPF Record Audit:** Validation of authorized sender mechanisms, DNS query lookup limits, and strict enforcement qualifiers (-all vs ~all).
+* **DKIM Signature Verification:** Cryptographic public key verification across specified DNS selectors.
+* **Forensic and Aggregate Telemetry:** Verification of aggregate (rua) feedback loops to detect Business Email Compromise.
+* **Zero External Dependencies:** Native DNS-over-HTTPS (DoH) engine with automated fallback to system nslookup.
+
+***
+
+## 2. Email Authentication Baseline & Scoring Matrix
+
+<table>
+  <thead>
+    <tr>
+      <th>Authentication Control</th>
+      <th>DNS Target Query</th>
+      <th>Compliant Defensive Baseline</th>
+      <th>Scoring Weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>DMARC Policy (p)</strong></td>
+      <td><code>_dmarc.&lt;domain&gt;</code></td>
+      <td><code>p=reject</code> (Drop unauthenticated messages)</td>
+      <td>45 points</td>
+    </tr>
+    <tr>
+      <td><strong>DMARC Aggregate Reports (rua)</strong></td>
+      <td><code>_dmarc.&lt;domain&gt;</code></td>
+      <td>Valid <code>mailto:</code> URI for XML aggregate telemetry</td>
+      <td>10 points</td>
+    </tr>
+    <tr>
+      <td><strong>SPF Enforcement Qualifier</strong></td>
+      <td><code>&lt;domain&gt;</code></td>
+      <td><code>-all</code> (Hardfail unauthorized sender IP addresses)</td>
+      <td>30 points</td>
+    </tr>
+    <tr>
+      <td><strong>DKIM Public Key</strong></td>
+      <td><code>&lt;selector&gt;._domainkey.&lt;domain&gt;</code></td>
+      <td>Valid public key record (<code>v=DKIM1; p=...</code>)</td>
+      <td>15 points</td>
+    </tr>
+    <tr>
+      <td><strong>Compliance Threshold</strong></td>
+      <td>Aggregated Assessment</td>
+      <td>Score &gt;= 85 (Compliant - Strict Defense Enforced)</td>
+      <td>100 points Total</td>
+    </tr>
+  </tbody>
+</table>
+
+***
+
+## 3. Installation and Quick Start
 
 Requires Python 3.8 or higher. Built strictly using the Python standard library with zero external dependencies.
 
 ```bash
 git clone https://github.com/TAVARDT-USA/dmarc-spf-guardian-usa.git
 cd dmarc-spf-guardian-usa
-python guardian.py enterprise.com
+python guardian.py example.com
 ```
 
-To test a specific DKIM selector or export results in structured JSON format:
+Run this tool directly via Python without installing third-party packages:
 
 ```bash
-python guardian.py enterprise.com -selector mail -json
+python guardian.py example.com -s default -j
 ```
+
+* **Native DoH Resolution:** Dispatches secure DNS-over-HTTPS queries directly to Cloudflare DNS, bypassing local resolver pollution.
+* **Automatic Fallback:** Gracefully fails over to local operating system `nslookup` if outbound HTTPS is restricted.
+* **Structured JSON Export:** Supports integration into continuous monitoring and deployment pipelines via `-j`.
 
 ***
 
-## Enterprise Defense Consulting
+## 4. Frequently Asked Questions (Technical FAQ)
 
-For dedicated cybersecurity architecture, threat modeling, and incident readiness in United States, contact **TAVARDT United States**.
+### 1. Why is DMARC p=reject preferred over p=none or p=quarantine?
+A policy of p=none operates in monitoring mode only, allowing forged messages to reach recipient inboxes. Moving to p=quarantine routes spoofed mail to spam folders, while p=reject instructs receiving mail servers to drop fraudulent traffic entirely, blocking Business Email Compromise.
+
+### 2. What is the operational danger of configuring SPF with +all or ?all qualifiers?
+An SPF record ending with +all explicitly authorizes every host on the internet to send email on behalf of your domain. A ?all qualifier indicates neutrality, providing zero anti-spoofing defense and leaving decision logic to receiving mail agents.
+
+### 3. How does guardian.py resolve DNS TXT records without third-party dependencies?
+The utility dispatches JSON-formatted DNS-over-HTTPS requests to cloudflare-dns.com over a secure SSL context. If external HTTPS queries are blocked, the script automatically falls back to native system nslookup execution.
+
+### 4. What is the significance of the DMARC rua tag in defensive email posture?
+The rua parameter designates destination mailboxes for daily aggregate XML reports generated by receiving mail transfer agents. These reports provide visibility into sending IP addresses, authentication pass rates, and illegitimate spoofing campaigns.
+
+### 5. How can this tool be automated in continuous security integration and CI/CD pipelines?
+Running guardian.py with the -j flag produces structured JSON output containing the numerical score, compliance status, and granular recommendations. Automated build systems can parse this output and fail pipeline stages if security scores drop below 85 points.
+
+***
+
+## 5. Technical Advisory & Email Security in the United States
+
+For advanced cybersecurity architecture, threat modeling, and incident readiness across North America, contact **TAVARDT**.
 
 ***
 
