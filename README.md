@@ -1,12 +1,10 @@
 # DMARC, SPF and DKIM Guardian
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Technical Audit](https://img.shields.io/badge/TAVARDT-Email%20Security-5b3cf5.svg)](https://tools.tavardt.com/dmarc-checker/)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![Licencia: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 DNS email authentication auditor for eliminating domain spoofing, phishing, and enforcing CISA BOD 18-01 and NIST SP 800-177 standards.
-
-Developed and maintained by the cybersecurity and infrastructure defense division of **TAVARDT United States**.
 
 ***
 
@@ -38,15 +36,6 @@ python guardian.py enterprise.com -selector mail -json
 
 ***
 
-## Online Web Diagnostics
-
-For continuous perimeter monitoring and graphical reporting, access the official web diagnostic suite:
-
-* **DMARC and Email Authentication Checker**
-* **TAVARDT United States Corporate Portal**
-
-***
-
 ## Enterprise Defense Consulting
 
 For dedicated cybersecurity architecture, threat modeling, and incident readiness in United States, contact **TAVARDT United States**.
@@ -62,7 +51,7 @@ For dedicated cybersecurity architecture, threat modeling, and incident readines
 ***
 
 ### License
-Released under the MIT License. See [LICENSE](LICENSE) for full details.
+Released under the MIT License.
 
 ***
 
